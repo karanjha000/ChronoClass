@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -15,9 +15,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-/**
- * OpenAPI / Swagger configuration for API documentation.
- */
 @Configuration
 public class OpenApiConfig {
 

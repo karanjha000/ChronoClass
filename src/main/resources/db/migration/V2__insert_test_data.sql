@@ -11,12 +11,12 @@ INSERT INTO courses (name, description) VALUES
 -- Insert Offerings (IDs will be auto-generated as 1, 2, 3)
 -- Teacher 1 (America/New_York)
 INSERT INTO offerings (course_id, teacher_id, title, teacher_timezone, max_students, enrolled_count, status) VALUES
-(1, 101, 'Saturday Batch', 'America/New_York', 20, 0, 'ACTIVE'),
-(2, 101, 'Summer Camp', 'America/New_York', 15, 0, 'ACTIVE');
+(1, 1, 'Saturday Batch', 'America/New_York', 20, 0, 'ACTIVE'),
+(2, 1, 'Summer Camp', 'America/New_York', 15, 0, 'ACTIVE');
 
 -- Teacher 2 (Europe/London)
 INSERT INTO offerings (course_id, teacher_id, title, teacher_timezone, max_students, enrolled_count, status) VALUES
-(3, 102, 'Evening Batch', 'Europe/London', 30, 0, 'ACTIVE');
+(3, 2, 'Evening Batch', 'Europe/London', 30, 0, 'ACTIVE');
 
 -- Insert Sessions (Dates in June 2026 for future)
 -- Offering 1: Saturday Batch (Weekly)

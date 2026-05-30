@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -12,10 +12,6 @@ import lombok.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-/**
- * Response DTO for an offering with its sessions.
- * Session times are converted to the requested timezone.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -59,6 +55,9 @@ public class OfferingResponse {
 
     @Schema(description = "List of sessions")
     private List<SessionResponse> sessions;
+
+    @Schema(description = "List of parent IDs enrolled in this offering")
+    private List<Long> enrolledParentIds;
 
     @Schema(description = "Offering creation time")
     private ZonedDateTime createdAt;

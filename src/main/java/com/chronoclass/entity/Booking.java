@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -10,10 +10,6 @@ import lombok.*;
 
 import java.time.Instant;
 
-/**
- * Represents a parent's booking of an offering.
- * Booking is at the offering level — booking an offering means booking ALL its sessions.
- */
 @Entity
 @Table(name = "bookings")
 @Getter

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -9,6 +9,7 @@ import com.chronoclass.dto.request.AddSessionsRequest;
 import com.chronoclass.dto.request.CreateOfferingRequest;
 import com.chronoclass.dto.response.OfferingResponse;
 import com.chronoclass.dto.response.SessionResponse;
+import com.chronoclass.entity.Booking;
 import com.chronoclass.entity.Course;
 import com.chronoclass.entity.Offering;
 import com.chronoclass.entity.Session;
@@ -28,10 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Service handling all teacher-facing operations:
- * creating offerings, adding sessions, and viewing offerings.
- */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -41,14 +38,6 @@ public class TeacherService {
     private final OfferingRepository offeringRepository;
     private final SessionRepository sessionRepository;
 
-    /**
-     * Creates a new offering for a teacher.
-     * If the course doesn't exist, it creates the course first.
-     *
-     * @param teacherId the teacher's ID
-     * @param request   the offering creation request
-     * @return the created offering response
-     */
     @Transactional
     public OfferingResponse createOffering(Long teacherId, CreateOfferingRequest request) {
         log.info("Creating offering for teacher {} — course: '{}', title: '{}'",
@@ -83,14 +72,6 @@ public class TeacherService {
         return toOfferingResponse(offering, teacherZone);
     }
 
-    /**
-     * Adds sessions to an existing offering.
-     * Session times are provided in the teacher's timezone and converted to UTC for storage.
-     *
-     * @param offeringId the offering ID
-     * @param request    the sessions to add
-     * @return the updated offering response
-     */
     @Transactional
     public OfferingResponse addSessions(Long offeringId, AddSessionsRequest request) {
         log.info("Adding {} sessions to offering {}", request.getSessions().size(), offeringId);
@@ -139,12 +120,6 @@ public class TeacherService {
         return toOfferingResponse(offering, teacherZone);
     }
 
-    /**
-     * Gets all offerings for a specific teacher.
-     *
-     * @param teacherId the teacher's ID
-     * @return list of offerings with sessions
-     */
     @Transactional(readOnly = true)
     public List<OfferingResponse> getTeacherOfferings(Long teacherId) {
         log.debug("Fetching offerings for teacher {}", teacherId);
@@ -156,13 +131,6 @@ public class TeacherService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Gets a single offering by ID with full session details.
-     *
-     * @param offeringId the offering ID
-     * @param timezone   optional timezone for display (defaults to teacher's timezone)
-     * @return offering details
-     */
     @Transactional(readOnly = true)
     public OfferingResponse getOfferingById(Long offeringId, String timezone) {
         Offering offering = offeringRepository.findByIdWithSessions(offeringId)
@@ -177,15 +145,18 @@ public class TeacherService {
 
     // ======================== Helper Methods ========================
 
-    /**
-     * Converts an Offering entity to an OfferingResponse DTO.
-     * Session times are converted to the specified display timezone.
-     */
     private OfferingResponse toOfferingResponse(Offering offering, ZoneId displayZone) {
         List<SessionResponse> sessionResponses = offering.getSessions().stream()
                 .map(s -> toSessionResponse(s, displayZone))
                 .sorted((a, b) -> a.getStartTime().compareTo(b.getStartTime()))
                 .collect(Collectors.toList());
+
+        List<Long> enrolledParentIds = (offering.getBookings() != null)
+                ? offering.getBookings().stream()
+                        .filter(b -> b.getStatus() == Booking.BookingStatus.CONFIRMED)
+                        .map(Booking::getParentId)
+                        .collect(Collectors.toList())
+                : new ArrayList<>();
 
         return OfferingResponse.builder()
                 .id(offering.getId())
@@ -200,13 +171,11 @@ public class TeacherService {
                 .status(offering.getStatus().name())
                 .displayTimezone(displayZone.getId())
                 .sessions(sessionResponses)
+                .enrolledParentIds(enrolledParentIds)
                 .createdAt(offering.getCreatedAt().atZone(displayZone))
                 .build();
     }
 
-    /**
-     * Converts a Session entity to a SessionResponse DTO with timezone conversion.
-     */
     private SessionResponse toSessionResponse(Session session, ZoneId displayZone) {
         ZonedDateTime start = session.getStartTime().atZone(displayZone);
         ZonedDateTime end = session.getEndTime().atZone(displayZone);
@@ -221,9 +190,6 @@ public class TeacherService {
                 .build();
     }
 
-    /**
-     * Validates and returns a ZoneId from a timezone string.
-     */
     private ZoneId validateTimezone(String timezone) {
         try {
             return ZoneId.of(timezone);
@@ -233,9 +199,6 @@ public class TeacherService {
         }
     }
 
-    /**
-     * Parses a local date-time string (ISO-8601 without timezone).
-     */
     private LocalDateTime parseLocalDateTime(String dateTimeStr) {
         try {
             return LocalDateTime.parse(dateTimeStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * REST controller for parent/student operations.
- * Parents can view available offerings, book offerings, and view their bookings.
- */
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
@@ -32,10 +28,6 @@ public class ParentController {
 
     private final ParentService parentService;
 
-    /**
-     * Get all available offerings.
-     * Session times are displayed in the parent's local timezone.
-     */
     @GetMapping("/offerings")
     @Operation(summary = "Get available offerings",
                description = "Returns all active offerings with available capacity. " +
@@ -50,13 +42,6 @@ public class ParentController {
         return ResponseEntity.ok(offerings);
     }
 
-    /**
-     * Book an offering for a parent.
-     * This is a concurrency-safe operation that handles:
-     * - Capacity checks
-     * - Duplicate booking prevention
-     * - Time conflict detection across all booked sessions
-     */
     @PostMapping("/parents/{parentId}/bookings")
     @Operation(summary = "Book an offering",
                description = "Books an entire offering for a parent. " +
@@ -72,10 +57,6 @@ public class ParentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    /**
-     * Get all bookings for a parent.
-     * Session times are shown in the parent's timezone.
-     */
     @GetMapping("/parents/{parentId}/bookings")
     @Operation(summary = "Get parent's bookings",
                description = "Returns all confirmed bookings for a parent with " +

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -10,10 +10,6 @@ import lombok.*;
 
 import java.time.ZonedDateTime;
 
-/**
- * Response DTO for a single session.
- * Times are displayed in the requested timezone.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

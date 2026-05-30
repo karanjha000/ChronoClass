@@ -1,6 +1,6 @@
 # ChronoClass — Global Class Offering Booking System
 
-> **⚠️ NOTICE**: This software is submitted solely for technical evaluation purposes as part of a hiring assessment. It is NOT licensed for commercial use, production deployment, or redistribution. See [LICENSE](LICENSE) for details.
+> **⚠️ LEGAL NOTICE**: This software and its associated codebase are the intellectual property of **Karan Jha**. It is submitted solely to **Undo School** for technical evaluation purposes as part of a hiring assessment. It is strictly NOT licensed for commercial use, production deployment, reproduction, or redistribution. See [LICENSE](LICENSE) for full details.
 
 ## 📋 Project Overview
 
@@ -43,13 +43,13 @@ ChronoClass is a production-ready backend service for a **global live-learning p
 
 ---
 
-## 🚀 Setup Instructions
+## 🚀 Local Setup & Quick Start Guide
+
+We have made this application extremely easy to run locally for evaluation purposes. **You do not need to install PostgreSQL or Docker** unless you want to. By default, the application runs on an in-memory H2 database pre-populated with test data!
 
 ### Prerequisites
 - Java 17+ (JDK)
 - Maven 3.8+
-- Docker & Docker Compose (for PostgreSQL)
-- OR a local PostgreSQL 16 instance
 
 ### Step 1: Clone the Repository
 ```bash
@@ -57,38 +57,67 @@ git clone <repository-url>
 cd ChronoClass
 ```
 
-### Step 2: Start PostgreSQL (via Docker)
+### Step 2: Set Environment Variables
+The application uses a `.env` file for configuration. We have provided a template.
 ```bash
-docker-compose up -d
+# Windows (PowerShell):
+Copy-Item .env.example .env
+
+# Mac/Linux:
+cp .env.example .env
 ```
-This starts PostgreSQL on port `5432` with:
-- Database: `chronoclass`
-- Username: `chronoclass`
-- Password: `chronoclass123`
+*(By default, the `.env` file is configured to use the in-memory H2 database, which is perfect for quick local testing. No further database setup is required!)*
 
 ### Step 3: Run the Application
 ```bash
 mvn spring-boot:run
 ```
-The application starts on `http://localhost:8080`.
-
-### Step 4: Access API Documentation
-Open Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+The application will start on `http://localhost:8080`.
 
 ---
 
-## 🔧 Environment Variables
+## 🖥️ Interactive Frontend UI & Demo
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5432/chronoclass` | PostgreSQL connection URL |
-| `SPRING_DATASOURCE_USERNAME` | `chronoclass` | Database username |
-| `SPRING_DATASOURCE_PASSWORD` | `chronoclass123` | Database password |
-| `SERVER_PORT` | `8080` | Application port |
+To make evaluation easier, this project includes a fully functional, beautifully designed interactive Frontend UI built with HTML/CSS/JS.
 
-Override via command line:
+Once the application is running, **open your browser and navigate to:**
+👉 **[http://localhost:8080](http://localhost:8080)**
+
+### How to use the Demo UI:
+1. **No Login Required**: The platform simulates user sessions. 
+2. **Switching Roles**: At the top right of the screen, you will see a "Simulating User" input box. 
+3. **Test Data Rules**: 
+   - **Teachers**: Valid Teacher IDs are **1** and **2**. (Teacher 1 is in New York, Teacher 2 is in London).
+   - **Parents**: Valid Parent IDs are **1 through 10**.
+4. Change the ID and select "Teacher" or "Parent" from the dropdown to instantly switch views.
+5. Parents can change their Timezone from the dropdown in the UI to see the exact session times automatically convert to their local time!
+
+### API Documentation (Swagger)
+If you prefer to test the raw REST APIs instead of the UI, you can access the Swagger documentation here:
+👉 **[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)**
+
+---
+
+## 🔧 Environment Setup
+
+The application uses environment variables for configuration. 
+
+1. Copy the provided `.env.example` file to create a `.env` file:
 ```bash
-mvn spring-boot:run -Dspring-boot.run.arguments="--spring.datasource.url=jdbc:postgresql://host:5432/db"
+cp .env.example .env
+```
+2. Update the `.env` file with your actual database credentials.
+
+| Variable | Description | Example / Default |
+|----------|-------------|---------|
+| `DB_URL` | PostgreSQL connection URL | `jdbc:postgresql://localhost:5433/chronoclass` |
+| `DB_USER` | Database username | `chronoclass` |
+| `DB_PASSWORD` | Database password | `chronoclass123` |
+| `SERVER_PORT` | Application port | `8080` |
+
+If running via Maven, ensure your terminal session has these variables exported, or use an IDE that supports `.env` files. Alternatively, pass them inline:
+```bash
+DB_URL=jdbc:postgresql://localhost:5433/chronoclass DB_USER=chronoclass DB_PASSWORD=chronoclass123 mvn spring-boot:run
 ```
 
 ---

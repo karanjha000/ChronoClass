@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * REST controller for teacher operations.
- * Teachers can create offerings, add sessions, and view their offerings.
- */
 @RestController
 @RequestMapping("/api/v1")
 @Tag(name = "Teacher APIs", description = "Endpoints for teachers to manage offerings and sessions")
@@ -35,10 +31,6 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    /**
-     * Create a new offering (section/batch) for a course.
-     * If the course doesn't exist, it will be created automatically.
-     */
     @PostMapping("/teachers/{teacherId}/offerings")
     @Operation(summary = "Create a new offering",
                description = "Creates a new offering/section for a course. " +
@@ -52,10 +44,6 @@ public class TeacherController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    /**
-     * Add sessions (meeting times) to an existing offering.
-     * Times should be provided in the teacher's local timezone.
-     */
     @PostMapping("/offerings/{offeringId}/sessions")
     @Operation(summary = "Add sessions to an offering",
                description = "Adds one or more sessions to an existing offering. " +
@@ -71,9 +59,6 @@ public class TeacherController {
         return ResponseEntity.ok(response);
     }
 
-    /**
-     * Get all offerings created by a specific teacher.
-     */
     @GetMapping("/teachers/{teacherId}/offerings")
     @Operation(summary = "Get teacher's offerings",
                description = "Returns all offerings created by the specified teacher, " +
@@ -86,9 +71,6 @@ public class TeacherController {
         return ResponseEntity.ok(offerings);
     }
 
-    /**
-     * Get details of a specific offering.
-     */
     @GetMapping("/offerings/{offeringId}")
     @Operation(summary = "Get offering details",
                description = "Returns detailed information about a specific offering, " +

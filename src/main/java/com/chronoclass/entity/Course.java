@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -12,10 +12,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents a course/class (e.g., Python Coding, Art Drawing).
- * A course can have multiple offerings (sections/batches).
- */
 @Entity
 @Table(name = "courses")
 @Getter

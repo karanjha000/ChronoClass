@@ -49,7 +49,7 @@
                     <label id="user-id-label" for="input-user-id">Parent ID</label>
                     <div class="input-icon-wrapper">
                         <i data-lucide="user" class="input-icon"></i>
-                        <input type="number" id="input-user-id" min="1" value="101" onchange="onUserIdChange()">
+                        <input type="number" id="input-user-id" min="1" max="10" value="2" onchange="onUserIdChange()">
                     </div>
                 </div>
 
@@ -279,8 +279,10 @@
             <form id="form-add-sessions" onsubmit="handleAddSessions(event)">
                 <input type="hidden" id="modal-input-offering-id">
                 
-                <div id="sessions-rows-container" class="sessions-rows-list">
-                    <!-- Session entry rows dynamically added here -->
+                <div class="modal-body-scroll">
+                    <div id="sessions-rows-container" class="sessions-rows-list">
+                        <!-- Session entry rows dynamically added here -->
+                    </div>
                 </div>
 
                 <div class="modal-actions-bar">

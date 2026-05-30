@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -12,11 +12,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents a schedulable offering/section of a course.
- * For example: "Saturday Batch" or "Summer Camp Weekday Batch".
- * Contains multiple sessions (actual meeting times).
- */
 @Entity
 @Table(name = "offerings")
 @Getter

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -10,10 +10,6 @@ import lombok.*;
 
 import java.time.Instant;
 
-/**
- * Represents an actual meeting time belonging to an offering.
- * Times are stored in UTC and converted to local timezones on read.
- */
 @Entity
 @Table(name = "sessions")
 @Getter
@@ -41,10 +37,6 @@ public class Session {
     @Builder.Default
     private Instant createdAt = Instant.now();
 
-    /**
-     * Checks whether this session overlaps with another session.
-     * Two sessions overlap if one starts before the other ends AND ends after the other starts.
-     */
     public boolean overlapsWith(Session other) {
         return this.startTime.isBefore(other.endTime) && this.endTime.isAfter(other.startTime);
     }

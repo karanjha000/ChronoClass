@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -12,10 +12,6 @@ import lombok.*;
 
 import java.util.List;
 
-/**
- * Request DTO for adding sessions to an offering.
- * Times are provided in the teacher's timezone and converted to UTC for storage.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

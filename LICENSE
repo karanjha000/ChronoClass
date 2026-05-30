@@ -1,24 +1,15 @@
 EVALUATION-ONLY LICENSE
 
-Copyright (c) 2026 ChronoClass. All rights reserved.
+Copyright (c) 2026 Karan Jha. All rights reserved.
 
-This software and associated documentation files (the "Software") are provided
-solely for the purpose of technical evaluation as part of a hiring assessment.
+This software and associated documentation files (the "Software") are the intellectual property of Karan Jha and are provided to Undo School solely for the purpose of technical evaluation as part of a hiring assessment.
 
-RESTRICTIONS:
-1. The Software may NOT be used, copied, modified, merged, published,
-   distributed, sublicensed, or sold for any commercial purpose.
-2. The Software may NOT be used in production, staging, or any deployment
-   environment.
-3. The Software may NOT be incorporated into any product or service.
-4. The evaluator may review and test the Software solely for assessment of
-   the author's technical capabilities.
-5. The evaluator must delete all copies of the Software after the evaluation
-   period is complete.
+By receiving, opening, or viewing this Software, you agree to the following RESTRICTIONS:
+1. The Software may NOT be used, copied, modified, merged, published, distributed, sublicensed, or sold for any commercial or non-commercial purpose.
+2. The Software may NOT be used in production, staging, or any deployment environment.
+3. The Software may NOT be incorporated into any product, service, or underlying technology.
+4. The evaluator may review and test the Software solely for the assessment of Karan Jha's technical capabilities.
+5. The evaluator must permanently delete all copies of the Software and associated documentation within 30 days of receipt.
+6. Unauthorized use, distribution, or reproduction of this Software will result in legal action.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

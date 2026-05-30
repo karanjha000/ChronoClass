@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 ChronoClass. All rights reserved.
+ * Copyright (c) 2026 Karan Jha. All rights reserved.
  * This software is submitted for evaluation purposes only.
  * Unauthorized commercial use, reproduction, or distribution is prohibited.
  */
@@ -12,9 +12,6 @@ import lombok.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-/**
- * Response DTO for a booking confirmation.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

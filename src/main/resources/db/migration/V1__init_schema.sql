@@ -1,6 +1,6 @@
 -- ============================================================
 -- ChronoClass — Database Schema V1
--- Copyright (c) 2026 ChronoClass. All rights reserved.
+-- Copyright (c) 2026 Karan Jha. All rights reserved.
 -- ============================================================
 
 -- Courses table
