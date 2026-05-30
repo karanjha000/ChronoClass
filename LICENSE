@@ -1,0 +1,24 @@
+EVALUATION-ONLY LICENSE
+
+Copyright (c) 2026 ChronoClass. All rights reserved.
+
+This software and associated documentation files (the "Software") are provided
+solely for the purpose of technical evaluation as part of a hiring assessment.
+
+RESTRICTIONS:
+1. The Software may NOT be used, copied, modified, merged, published,
+   distributed, sublicensed, or sold for any commercial purpose.
+2. The Software may NOT be used in production, staging, or any deployment
+   environment.
+3. The Software may NOT be incorporated into any product or service.
+4. The evaluator may review and test the Software solely for assessment of
+   the author's technical capabilities.
+5. The evaluator must delete all copies of the Software after the evaluation
+   period is complete.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

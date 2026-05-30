@@ -1,0 +1,40 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.settings/
+.factorypath
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Build
+build/
+out/
+*.jar
+*.war
+*.class
+
+# Environment
+.env
+*.env.local
+
+# H2 Database
+*.db
+*.mv.db
+*.trace.db

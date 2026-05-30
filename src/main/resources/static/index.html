@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ChronoClass - A premium timezone-aware class offering and booking portal for teachers and parents.">
+    <title>ChronoClass — Live Class Booking System</title>
+    <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link to custom vanilla styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Main Navigation & Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-icon-wrapper">
+                    <i data-lucide="clock" class="logo-icon"></i>
+                </div>
+                <div>
+                    <h1 class="logo-title">ChronoClass</h1>
+                    <p class="logo-subtitle">Global Live-Learning Platform</p>
+                </div>
+            </div>
+
+            <!-- Portal Switcher -->
+            <div class="portal-switcher">
+                <button id="btn-portal-parent" class="btn-toggle active" onclick="switchPortal('parent')">
+                    <i data-lucide="graduation-cap"></i> Parent Portal
+                </button>
+                <button id="btn-portal-teacher" class="btn-toggle" onclick="switchPortal('teacher')">
+                    <i data-lucide="presentation"></i> Teacher Portal
+                </button>
+            </div>
+
+            <!-- Global Identity and Timezone Controls -->
+            <div class="global-controls">
+                <!-- User ID Selector -->
+                <div class="control-group">
+                    <label id="user-id-label" for="input-user-id">Parent ID</label>
+                    <div class="input-icon-wrapper">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="number" id="input-user-id" min="1" value="101" onchange="onUserIdChange()">
+                    </div>
+                </div>
+
+                <!-- Timezone Selector -->
+                <div class="control-group">
+                    <label for="select-timezone">Display Timezone</label>
+                    <div class="input-icon-wrapper">
+                        <i data-lucide="globe" class="input-icon"></i>
+                        <select id="select-timezone" onchange="onTimezoneChange()">
+                            <!-- Populated dynamically via JS -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+        
+        <!-- ================= PARENT PORTAL WORKSPACE ================= -->
+        <section id="portal-parent" class="portal-section active">
+            <!-- Top Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <div class="stat-icon-wrapper blue">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <div>
+                        <span class="stat-label">Available Classes</span>
+                        <h3 id="stat-parent-available" class="stat-value">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon-wrapper green">
+                        <i data-lucide="check-circle-2"></i>
+                    </div>
+                    <div>
+                        <span class="stat-label">My Confirmed Bookings</span>
+                        <h3 id="stat-parent-bookings" class="stat-value">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon-wrapper purple">
+                        <i data-lucide="calendar"></i>
+                    </div>
+                    <div>
+                        <span class="stat-label">Timezone Scope</span>
+                        <h3 id="stat-parent-timezone" class="stat-value">-</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parent Views Tabs -->
+            <div class="tab-container glass">
+                <div class="tab-headers">
+                    <button id="tab-btn-browse" class="tab-btn active" onclick="switchParentTab('browse')">
+                        <i data-lucide="search"></i> Browse Offerings
+                    </button>
+                    <button id="tab-btn-bookings" class="tab-btn" onclick="switchParentTab('bookings')">
+                        <i data-lucide="calendar-check"></i> My Bookings & Schedule
+                    </button>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Tab: Browse Offerings -->
+                    <div id="parent-tab-browse" class="tab-panel active">
+                        <div class="section-title-bar">
+                            <div>
+                                <h2>Available Live Class Offerings</h2>
+                                <p class="text-secondary">All session times are automatically converted to your selected timezone below.</p>
+                            </div>
+                            <button class="btn btn-secondary btn-sm" onclick="fetchAvailableOfferings()">
+                                <i data-lucide="rotate-cw"></i> Refresh Listings
+                            </button>
+                        </div>
+
+                        <!-- Grid list of offerings -->
+                        <div id="available-offerings-grid" class="offerings-grid">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Tab: My Booked Offerings -->
+                    <div id="parent-tab-bookings" class="tab-panel">
+                        <div class="section-title-bar">
+                            <div>
+                                <h2>Your Booked Classes</h2>
+                                <p class="text-secondary">Review your class schedule. The system checks and prevents overlapping sessions dynamically.</p>
+                            </div>
+                            <button class="btn btn-secondary btn-sm" onclick="fetchParentBookings()">
+                                <i data-lucide="rotate-cw"></i> Refresh Bookings
+                            </button>
+                        </div>
+
+                        <!-- Grid list of bookings -->
+                        <div id="parent-bookings-grid" class="offerings-grid">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TEACHER PORTAL WORKSPACE ================= -->
+        <section id="portal-teacher" class="portal-section">
+            <!-- Top Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <div class="stat-icon-wrapper purple">
+                        <i data-lucide="folders"></i>
+                    </div>
+                    <div>
+                        <span class="stat-label">My Offerings</span>
+                        <h3 id="stat-teacher-offerings" class="stat-value">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon-wrapper orange">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <div>
+                        <span class="stat-label">Total Enrollments</span>
+                        <h3 id="stat-teacher-enrollments" class="stat-value">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-icon-wrapper green">
+                        <i data-lucide="video"></i>
+                    </div>
+                    <div>
+                        <span class="stat-label">Teacher Timezone</span>
+                        <h3 id="stat-teacher-timezone" class="stat-value">-</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workspace Grid -->
+            <div class="teacher-grid">
+                <!-- Left panel: Create new offering -->
+                <div class="panel-card glass">
+                    <div class="panel-header">
+                        <i data-lucide="plus-circle" class="panel-icon text-primary"></i>
+                        <div>
+                            <h2>Create New Offering</h2>
+                            <p class="text-secondary">Set up a new live learning batch for students.</p>
+                        </div>
+                    </div>
+                    
+                    <form id="form-create-offering" class="form-grid" onsubmit="handleCreateOffering(event)">
+                        <div class="form-group">
+                            <label for="input-course-name">Course Name <span class="required">*</span></label>
+                            <input type="text" id="input-course-name" placeholder="e.g. Python Coding for Beginners" required value="Intro to Python Programming">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-course-desc">Course Description</label>
+                            <textarea id="input-course-desc" rows="3" placeholder="Describe what students will learn in this class..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-offering-title">Offering Title <span class="required">*</span></label>
+                            <input type="text" id="input-offering-title" placeholder="e.g. Summer Weekend Batch" required value="Saturday Morning Batch">
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="input-max-students">Max Students <span class="required">*</span></label>
+                                <input type="number" id="input-max-students" min="1" max="100" value="15" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-teacher-timezone">Teacher Timezone <span class="required">*</span></label>
+                                <select id="input-teacher-timezone" required>
+                                    <!-- Populated dynamically via JS -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i data-lucide="check"></i> Create Class Offering
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right panel: Existing offerings -->
+                <div class="panel-card glass">
+                    <div class="panel-header-action">
+                        <div class="panel-header">
+                            <i data-lucide="list" class="panel-icon text-primary"></i>
+                            <div>
+                                <h2>Active Class Offerings</h2>
+                                <p class="text-secondary">Offerings you created. Add meeting sessions to schedule classes.</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="fetchTeacherOfferings()">
+                            <i data-lucide="rotate-cw"></i> Refresh
+                        </button>
+                    </div>
+
+                    <!-- Teacher offerings list -->
+                    <div id="teacher-offerings-list" class="teacher-offerings-container">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= ADD SESSIONS MODAL ================= -->
+    <div id="modal-add-sessions" class="modal-overlay">
+        <div class="modal-card glass animate-slide-up">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <div class="modal-icon-wrapper">
+                        <i data-lucide="calendar-plus"></i>
+                    </div>
+                    <div>
+                        <h2 id="modal-offering-title">Add Sessions</h2>
+                        <p id="modal-offering-subtitle" class="text-secondary">Define meeting times. Use the teacher's timezone.</p>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeSessionsModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <form id="form-add-sessions" onsubmit="handleAddSessions(event)">
+                <input type="hidden" id="modal-input-offering-id">
+                
+                <div id="sessions-rows-container" class="sessions-rows-list">
+                    <!-- Session entry rows dynamically added here -->
+                </div>
+
+                <div class="modal-actions-bar">
+                    <button type="button" class="btn btn-secondary" onclick="addSessionRow()">
+                        <i data-lucide="plus"></i> Add Another Slot
+                    </button>
+                    <div class="modal-submit-group">
+                        <button type="button" class="btn btn-text" onclick="closeSessionsModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i data-lucide="save"></i> Save Sessions
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="js/app.js"></script>
+</body>
+</html>

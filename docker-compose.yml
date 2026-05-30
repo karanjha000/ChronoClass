@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: chronoclass-db
+    environment:
+      POSTGRES_DB: chronoclass
+      POSTGRES_USER: chronoclass
+      POSTGRES_PASSWORD: chronoclass123
+    ports:
+      - "5433:5432"
+    volumes:
+      - chronoclass_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chronoclass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  chronoclass_data:
