@@ -2,6 +2,8 @@
 
 > **⚠️ LEGAL NOTICE**: This software and its associated codebase are the intellectual property of **Karan Jha**. It is submitted solely to **Undo School** for technical evaluation purposes as part of a hiring assessment. It is strictly NOT licensed for commercial use, production deployment, reproduction, or redistribution. See [LICENSE](LICENSE) for full details.
 
+🟢 **LIVE DEMO**: [https://chronoclass-api.onrender.com](https://chronoclass-api.onrender.com) (Interactive UI & API available)
+
 ## 📋 Project Overview
 
 ChronoClass is a production-ready backend service for a **global live-learning platform** where teachers conduct online classes for students across different countries and timezones.
