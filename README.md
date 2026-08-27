@@ -4,7 +4,7 @@
 
 ## 📋 Project Overview
 
-ChronoClass is a production-ready backend service for a **global live-learning platform** where teachers conduct online classes for students across different countries and timezones.
+ChronoClass is a Production-oriented backend prototype for a **global live-learning platform** where teachers conduct online classes for students across different countries and timezones.
 
 ### Core Concepts
 
